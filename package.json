@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node bot.js"
+    "start": "node —harmony bot.js"
   },
   "main": "bot.js",
   "dependencies": {

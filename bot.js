@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
-const config = require('./config.json');
+const config = require('./private/config/config.json');
+const channels = require('./private/config/channels.json');
+const roles = require('./private/config/roles.json');
 const bot = new Discord.Client();
+
 
 //On bot Ready
 bot.on('ready', () =>  {
@@ -16,8 +19,24 @@ bot.on('message', message => {
 
 //On new member
 bot.on('guildMemberAdd', member => {
-    member.guild.channels.get('')
-})
+    let embed = new Discord.RichEmbed()
+        .setDescription(':tada: **Bienvenue** chez ' + member.guild + ", " + member.user + ' ! :smile:')
+        .setFooter('Nous sommes maintenant ' + member.guild.memberCount);
+
+    member.guild.channels.get(channel.general.id)
+        .send(embed);
+    member.addRole(roles.jeunot);
+});
+
+//On member leave
+bot.on('guildMemberRemove', member => {
+    let embed = new Discord.RichEmbed()
+        .setDescription(':cry: ' + member.user + ' a quitté ' + member.guild + ' ! :smile:')
+        .setFooter('Nous ne sommes plus que ' + member.guild.memberCount);
+
+    member.guild.channels.get(channel.general.id)
+        .send(embed);
+});
 
 //Login in
 bot.login(config.token);
