@@ -1,17 +1,23 @@
-// Token : NTU1MTYzNDE4OTc0NDg2NTYw.D2nLzQ.CApqcb6ko_yeAWaX9KAid8HL7HE
-// Client ID : 555163418974486560
-
 const Discord = require("discord.js");
+const config = require('./config.json');
 const bot = new Discord.Client();
 
+//On bot Ready
 bot.on('ready', () =>  {
     console.log("Bot Started !");
 });
 
+//On "Hello" received
 bot.on('message', message => {
     if (message.content.toLowerCase().includes('hello bot!')) {
         message.channel.send("Hello " + message.author);
     }
 });
 
-bot.login('NTU1MTYzNDE4OTc0NDg2NTYw.D2nLzQ.CApqcb6ko_yeAWaX9KAid8HL7HE');
+//On new member
+bot.on('guildMemberAdd', member => {
+    member.guild.channels.get('')
+})
+
+//Login in
+bot.login(config.token);
